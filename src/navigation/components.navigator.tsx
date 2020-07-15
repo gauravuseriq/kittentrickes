@@ -39,6 +39,7 @@ import {
   Button,
   Layout,
   Input,
+  Select,
 } from "@ui-kitten/components";
 import { ScrollView } from "react-native-gesture-handler";
 import { ProfileSetting } from "../layouts/social/profile-settings-3/extra/profile-setting.component";
@@ -50,6 +51,8 @@ import UserIQ from "@useriq/useriq-react-native";
 
 // const Stack = createStackNavigator();
 const profile: Profile = Profile.jenniferGreen();
+
+const SELECT_DATA = [{ text: "Production" }, { text: "QA" }];
 
 export const ComponentsNavigator = (): React.ReactElement => {
   // <Stack.Navigator headerMode='none'>
@@ -98,7 +101,8 @@ export const ComponentsNavigator = (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   const [notFirstTime, setNotFirstTime] = React.useState<boolean>(false);
-  const [appInit, setAppInit] = React.useState<boolean>(false);
+  // const [appInit, setAppInit] = React.useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = React.useState(null);
 
   const [apiId, setApiId] = React.useState<string>("");
 
@@ -156,7 +160,10 @@ export const ComponentsNavigator = (): React.ReactElement => {
   };
 
   const initApp = async () => {
-    UserIQ.setHost("qa-mobile");
+    if (selectedOption && selectedOption.text == "QA") {
+      UserIQ.setHost("qa-mobile");
+    }
+
     UserIQ.init(apiId);
 
     try {
@@ -165,7 +172,7 @@ export const ComponentsNavigator = (): React.ReactElement => {
       console.log("Error saving data" + error);
     }
 
-    setAppInit(true);
+    // setAppInit(true);
   };
 
   return (
@@ -181,6 +188,14 @@ export const ComponentsNavigator = (): React.ReactElement => {
         contentContainerStyle={styles.contentContainer}
       >
         <Layout style={styles.form} level="1">
+          <Select
+            data={SELECT_DATA}
+            selectedOption={selectedOption}
+            onSelect={(value) => setSelectedOption(value)}
+            onFocus={() => {}}
+            onBlur={() => {}}
+          />
+
           <Input
             style={styles.input}
             label="API Key"
@@ -188,15 +203,9 @@ export const ComponentsNavigator = (): React.ReactElement => {
             value={apiId}
             accessibilityLabel="API Key"
             onChangeText={setApiId}
-            disabled={appInit}
           />
 
-          <Button
-            style={styles.doneButton}
-            size="giant"
-            onPress={initApp}
-            disabled={appInit}
-          >
+          <Button style={styles.doneButton} size="giant" onPress={initApp}>
             Init SDK
           </Button>
         </Layout>
@@ -269,11 +278,10 @@ export const ComponentsNavigator = (): React.ReactElement => {
             onChangeText={setAccountName}
           />
         </Layout>
-
-        <Button style={styles.doneButton} size="giant" onPress={setNewUser}>
-          Update User Credentials
-        </Button>
       </ScrollView>
+      <Button style={styles.doneButton} size="giant" onPress={setNewUser}>
+        Update User Credentials
+      </Button>
     </SafeAreaLayout>
   );
 };
