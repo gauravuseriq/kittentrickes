@@ -237,8 +237,8 @@ PODS:
     - React
   - RNSVG (9.13.3):
     - React
-  - UserIQ (2.7.0)
-  - UseriqReactNative (2.7.0):
+  - UserIQ (2.7.1)
+  - UseriqReactNative (2.7.1):
     - React
     - UserIQ
   - Yoga (1.14.0)
@@ -400,8 +400,8 @@ SPEC CHECKSUMS:
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: 254da4b84f25971cbb30ed3ddc84131f23cac812
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
-  UserIQ: 69e68ee02ef69e59e7442005bcb7aaba17dc9efc
-  UseriqReactNative: e85e5c9c535cfba7f1542c4c18f0f58cccb85c3c
+  UserIQ: bbf153b18117331b4d9870938cee4dce1b3c5855
+  UseriqReactNative: ac64ec110388d870514c51a80018063d920c9da4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 243228e6c776d4f37a59752258187bfd70768da6
